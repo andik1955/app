@@ -1,0 +1,79 @@
+#:kivy 1.8.0
+
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    StartScreen:
+    SetWorkout:
+    SetSession:
+    SetTake:
+
+<NumProp>:
+    name: "numeric"
+    GridLayout
+        Button:
+            on_release: root.counter.countDown()
+            text: "-"
+            pos: 0, 0
+            size: root.width/3, root.height
+        Label:
+            text: str(root.counter)
+            pos: root.width/3, 0
+            size: root.width/3, root.height
+        Button:
+            on_release: root.counter.countUp()
+            text: "+"
+            pos: 2*(root.width/3), 0
+            size: root.width/3, root.height
+
+<StartScreen>:
+    name: "start"
+    GridLayout:
+        Button:
+            on_release: app.root.current = "workout"
+            text: "Create New Workout"
+            size: root.width, root.height/2
+            pos: 0, root.height/2
+        Button:
+            on_release: app.root.current = "workout"
+            text: "Load Workout"
+            size: root.width, root.height/2
+            pos: 0, 0
+
+<SetWorkout>:
+    name: "workout"
+    GridLayout:
+        Button:
+            on_release: app.root.current = "session"
+            text: "Set Session"
+            size: root.width, root.height/2
+            pos: 0, root.height/2
+        Button:
+            on_release: app.root.current = "start"
+            text: "Back"
+            size: root.width, root.height/2
+            pos: 0, 0
+
+<SetSession>:
+    name: "session"
+    GridLayout:
+        Button:
+            on_release: app.root.current = "take"
+            text: "Set Take"
+            size: root.width, root.height/2
+            pos: 0, root.height/2
+        Button:
+            on_release: app.root.current = "workout"
+            text: "Back"
+            size: root.width, root.height/2
+            pos: 0, 0
+
+<SetTake>:
+    name: "take"
+    GridLayout:
+        Button:
+            on_release: app.root.current = "session"
+            text: "Back"
+            size: root.width, root.height/2
+            pos: 0, 0
