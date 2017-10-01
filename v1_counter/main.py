@@ -10,6 +10,27 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 
 
+class RemindLazyMofos(Popup):
+
+    def __init__(self, **kwargs):
+        super(RemindLazyMofos, self).__init__(**kwargs)
+
+        self.label = Label(text="You lazy mofo, a Session contains at least one Set. You don't get strong without training")
+        self.button = Button(text="Ok, i got it ...").bind(on_click = close)
+        self.container = BoxLayout(orientation="vertical")
+
+        self.container.add_widget(self.label)
+        self.container.add_widget(self.button)
+
+        self.content = self.container
+        self.auto_dismiss=False
+
+        #self.content.container.button.bind(on_click = self.dismiss)
+
+        self.open()
+
+    def close(self, event):
+        self.dismiss()
 
 class StartScreen(BoxLayout):
 
@@ -61,8 +82,10 @@ class StartScreen(BoxLayout):
             #for i in range(tempCounter, self.counterVar):
             buttonID = "id" + str(tempCounter)
             self.remove_widget(self.children[0])
-'''
+
         else:
+            RemindLazyMofos()
+'''
             self.grid = GridLayout(rows = 2)
             self.label = Label(text="You don't get stronger without training!")
             self.close = Button(text='I know ...').bind(on_click=p_up.dismiss)
@@ -71,7 +94,7 @@ class StartScreen(BoxLayout):
             self.grid.add_widget(self.close)
 
             self.p_up = Popup(content = self.grid)
-            #self.p_up.content.grid.close.bind(on_click = self.p_up.dismiss())
+            self.p_up.content.grid.close.bind(on_click = self.p_up.dismiss())
             self.p_up.open()
 '''
 
